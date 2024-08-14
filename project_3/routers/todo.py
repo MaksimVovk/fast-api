@@ -1,10 +1,10 @@
 from typing import Annotated
 from fastapi import Depends, HTTPException, APIRouter, Path
 from starlette import status
-from models import Todos
-from db.db import DB_ANNOTATED
-from validation.todo_request import TodoRequest
-from routers.auth import get_current_user
+from ..models import Todos
+from ..db.db import DB_ANNOTATED
+from ..validation.todo_request import TodoRequest
+from ..routers.auth import get_current_user
 
 router = APIRouter(
   tags=['todo']

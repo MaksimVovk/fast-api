@@ -1,9 +1,9 @@
 from typing import Annotated
 from fastapi import Depends, HTTPException, APIRouter, Path
 from starlette import status
-from models import Todos
-from db.db import DB_ANNOTATED
-from routers.auth import get_current_user
+from ..models import Todos
+from ..db.db import DB_ANNOTATED
+from ..routers.auth import get_current_user
 
 router = APIRouter(
   prefix='/admin',
