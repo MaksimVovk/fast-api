@@ -11,10 +11,10 @@
 from fastapi import APIRouter, Depends, HTTPException, Path
 from starlette import status
 from typing import Annotated
-from models import Users
-from db.db import DB_ANNOTATED
-from routers.auth import get_current_user
-from validation.users import ChangePassword, UpdatePhone
+from ..models import Users
+from ..db.db import DB_ANNOTATED
+from ..routers.auth import get_current_user
+from ..validation.users import ChangePassword, UpdatePhone
 from passlib.context import CryptContext
 
 router = APIRouter(

@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, HTTPException
-from validation.users import CreateUserRequest, Token
-from models import Users
+from ..validation.users import CreateUserRequest, Token
+from ..models import Users
 from starlette import status
-from db.db import DB_ANNOTATED
+from ..db.db import DB_ANNOTATED
 from typing import Annotated, Optional
 from fastapi import Depends
 from passlib.context import CryptContext
