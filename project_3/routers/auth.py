@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from ..validation.users import CreateUserRequest, Token
 from ..models import Users
 from starlette import status
@@ -9,6 +9,7 @@ from fastapi import Depends
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError # type: ignore
+from fastapi.templating import Jinja2Templates
 
 router = APIRouter(
   prefix='/auth',
@@ -22,6 +23,20 @@ DB_ANNOTATED_AUTH = Annotated[OAuth2PasswordRequestForm, Depends()]
 DB_ANNOTATED_BEARER = Annotated[str, Depends(oauth2_bearer)]
 SECRET_KEY = '25fd775657d238053357080198e3eed94e96ce522a1b593fc520276022324cdf'
 ALGORITHM = 'HS256'
+
+templates = Jinja2Templates(directory='project_3/templates')
+
+### Pages ###
+
+@router.get('/login-page')
+def render_login_page(request: Request):
+  return templates.TemplateResponse('login.html', { 'request': request })
+
+@router.get('/register-page')
+def render_register_page(request: Request):
+  return templates.TemplateResponse('register.html', { 'request': request })
+
+### Endpoints ###
 
 def auth_user(username: str, password: str, db):
   user = db.query(Users).filter(Users.username == username).first()
